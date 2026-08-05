@@ -1,0 +1,120 @@
+generated: '2026-08-05'
+method: probed
+source: https://start.uptake.com/.well-known/openid-configuration
+docs: null
+summary: >-
+  Uptake has no published OpenAPI, so this profile is built from what the estate
+  actually serves. Two authentication models are visible from outside. (1) Human
+  and application sign-in to the Uptake platform is OpenID Connect against an Okta
+  tenant on Uptake's own custom domain, start.uptake.com — the discovery document
+  is public and is saved verbatim under well-known/. (2) The machine API surface
+  at api.uptake.com and api.common.uptake.com is an AWS API Gateway that returns
+  403 ForbiddenException to every anonymous request; third-party integration
+  documentation (COZYROC's Uptake CloudLink connector) describes that surface as
+  key-based, sending a tenant header, a bearer Authorization header and an
+  x-api-key header. Key issuance is not self-service: Fleetio's integration guide
+  instructs customers to send their token to an Uptake account representative who
+  completes the connection.
+schemes:
+- id: uptake-oidc
+  type: openIdConnect
+  in: null
+  scheme: null
+  openIdConnectUrl: https://start.uptake.com/.well-known/openid-configuration
+  issuer: https://start.uptake.com
+  identity_provider: Okta (custom domain)
+  endpoints:
+    authorization: https://start.uptake.com/oauth2/v1/authorize
+    token: https://start.uptake.com/oauth2/v1/token
+    userinfo: https://start.uptake.com/oauth2/v1/userinfo
+    jwks: https://start.uptake.com/oauth2/v1/keys
+    registration: https://start.uptake.com/oauth2/v1/clients
+    revocation: https://start.uptake.com/oauth2/v1/revoke
+    introspection: https://start.uptake.com/oauth2/v1/introspect
+  grant_types_supported:
+  - authorization_code
+  - implicit
+  - refresh_token
+  - password
+  - urn:ietf:params:oauth:grant-type:device_code
+  response_types_supported:
+  - code
+  - id_token
+  - code id_token
+  - code token
+  - id_token token
+  - code id_token token
+  token_endpoint_auth_methods_supported:
+  - client_secret_basic
+  - client_secret_post
+  - client_secret_jwt
+  - private_key_jwt
+  - none
+  id_token_signing_alg_values_supported:
+  - RS256
+  pkce: true
+  pkce_code_challenge_methods:
+  - S256
+  dynamic_client_registration: true
+  evidence:
+    url: https://start.uptake.com/.well-known/openid-configuration
+    http_status: 200
+    content_type: application/json
+    fetched: '2026-08-05'
+    file: well-known/uptake-openid-configuration.json
+- id: uptake-oauth-authorization-server
+  type: oauth2
+  metadata: RFC 8414
+  metadata_url: https://start.uptake.com/.well-known/oauth-authorization-server
+  issuer: https://start.uptake.com
+  grant_types_supported:
+  - authorization_code
+  - implicit
+  - refresh_token
+  - password
+  - client_credentials
+  - urn:ietf:params:oauth:grant-type:device_code
+  note: >-
+    Adds client_credentials over the OIDC document. The scopes_supported list on
+    this document is Okta's own org-management scope set (okta.*), exposed
+    because the tenant fronts the Okta management API — it is not the Uptake
+    product API scope set. See scopes/uptake-scopes.yml.
+  evidence:
+    url: https://start.uptake.com/.well-known/oauth-authorization-server
+    http_status: 200
+    content_type: application/json
+    fetched: '2026-08-05'
+    file: well-known/uptake-oauth-authorization-server.json
+- id: uptake-platform-api-key
+  type: apiKey
+  in: header
+  name: x-api-key
+  companion_headers:
+  - Authorization (Bearer)
+  - Tenant
+  confidence: medium
+  first_party_documented: false
+  note: >-
+    NOT confirmed against an Uptake-published document. Reconstructed from a
+    third-party connector reference (COZYROC "Uptake CloudLink Connection",
+    base https://use-api.cloudlink.uptake.com/v1/), which describes session-token
+    auth with a required Tenant and apiKey and the three headers above. The
+    cloudlink.uptake.com hostname no longer resolves in DNS, so the CloudLink
+    product surface appears retired; the current gateway at api.uptake.com was
+    not confirmed to use the same scheme.
+  evidence:
+    url: https://www.cozyroc.com/ssis/uptake-cloudlink-connection
+    http_status: 200
+    fetched: '2026-08-05'
+gated_surfaces:
+- url: https://api.uptake.com/
+  http_status: 403
+  body: '{"message":"Forbidden"}'
+  note: AWS API Gateway ForbiddenException; no WWW-Authenticate challenge is returned, so no scheme is advertised anonymously.
+- url: https://api.common.uptake.com/
+  http_status: 403
+  note: Same behavior.
+- url: https://developer.uptake.com/
+  http_status: 404
+  note: Former developer portal, now dead.
+checked: '2026-08-05'

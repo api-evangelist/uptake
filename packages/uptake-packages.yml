@@ -1,0 +1,61 @@
+generated: '2026-08-05'
+method: searched
+source: https://github.com/uptake
+summary: >-
+  Uptake publishes no client SDK for its own platform API — there is no first-party
+  library on npm, PyPI, Maven Central, NuGet, pkg.go.dev, RubyGems, Packagist or
+  crates.io that wraps api.uptake.com. What Uptake does publish, from its data-science
+  team, is a set of general-purpose open-source packages under github.com/uptake
+  (16 public repos), two of which are on CRAN and still maintained. They are recorded
+  here as genuine first-party packages, flagged api_client:false so nothing reads
+  them as an Uptake API SDK. NOTE on name collisions: pypi.org/project/numpynet,
+  /updoc and /groundhog exist but belong to unrelated authors — Uptake's repos of
+  those names were never published to PyPI. No `SDKs` pointer is wired in apis.yml,
+  because none of these is a client for an Uptake API.
+packages:
+- name: uptasticsearch
+  language: r
+  registry: CRAN
+  registry_url: https://cran.r-project.org/package=uptasticsearch
+  repository: https://github.com/uptake/uptasticsearch
+  version: 1.1.0
+  published: '2026-01-08'
+  official: true
+  api_client: false
+  description: Elasticsearch client tailored to data-science workflows; returns query results as a data.table.
+  evidence: {url: 'https://cran.r-project.org/package=uptasticsearch', http_status: 200}
+- name: pkgnet
+  language: r
+  registry: CRAN
+  registry_url: https://cran.r-project.org/package=pkgnet
+  repository: https://github.com/uptake/pkgnet
+  version: 0.6.0
+  published: '2026-01-27'
+  official: true
+  api_client: false
+  description: Analyzes other R packages via graph representations of their function and dependency structure.
+  evidence: {url: 'https://cran.r-project.org/package=pkgnet', http_status: 200}
+source_only_repos:
+- {name: autofocus, language: Jupyter Notebook, url: 'https://github.com/uptake/autofocus', description: Deep-learning computer vision for classifying wildlife in camera-trap images.}
+- {name: numpynet, language: Python, url: 'https://github.com/uptake/numpynet', description: Approachable neural-net implementation in pure numpy. Not on PyPI.}
+- {name: updraft, language: R, url: 'https://github.com/uptake/updraft', description: R package for building flexible workflows. Not on CRAN (404).}
+- {name: updoc, language: Python, url: 'https://github.com/uptake/updoc', description: Application for serving documentation in a cloud environment. Not on PyPI.}
+- {name: groundhog, language: Python, url: 'https://github.com/uptake/groundhog', description: Service and client libraries for SRTM elevation data. Not on PyPI.}
+- {name: cran-server, language: Python, url: 'https://github.com/uptake/cran-server', description: Self-hosted R package repository.}
+- {name: fRanz, language: R, url: 'https://github.com/uptake/fRanz', description: R client for Apache Kafka. Not on CRAN (404).}
+- {name: octopus, language: Ruby, url: 'https://github.com/uptake/octopus', description: Bulk analysis and mass refactor of system-wide configuration files.}
+- {name: cloudbouncer, language: Python, url: 'https://github.com/uptake/cloudbouncer', description: Tools from Uptake's Cloud Security team for security and compliance.}
+- {name: omnibus, language: Kotlin, url: 'https://github.com/uptake/omnibus', description: Migrates Maven binaries between Nexus and Artifactory.}
+- {name: airflow-api, language: Python, url: 'https://github.com/uptake/airflow-api', description: RESTful API plugin for the Apache Airflow webserver.}
+- {name: tech-blog, language: Python, url: 'https://github.com/uptake/tech-blog', description: 'Code and data from the Uptake engineering blog (medium.com/uptake-tech).'}
+registries_checked:
+- {registry: npm, result: no first-party Uptake package found}
+- {registry: PyPI, result: 'no first-party Uptake package; three name collisions with unrelated authors'}
+- {registry: CRAN, result: 2 packages}
+- {registry: Maven Central, result: none}
+- {registry: NuGet, result: none}
+- {registry: RubyGems, result: none}
+- {registry: crates.io, result: none}
+- {registry: pkg.go.dev, result: none}
+- {registry: Packagist, result: none}
+checked: '2026-08-05'

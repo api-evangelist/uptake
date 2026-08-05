@@ -1,0 +1,113 @@
+generated: '2026-08-05'
+method: probed
+source: >-
+  Probes of https://start.uptake.com/.well-known/openid-configuration and
+  /.well-known/oauth-authorization-server, plus HTTP/TLS probes of the uptake.com
+  estate. No Uptake-published compliance page could be fetched (uptake.com is
+  behind a SiteGround bot challenge from our probe), so no certification is asserted.
+summary: >-
+  Only the identity layer is verifiable from outside. Uptake's Okta tenant serves
+  conformant OpenID Connect Discovery and RFC 8414 authorization-server metadata,
+  including PKCE S256 and RFC 7591 dynamic client registration. Nothing else on the
+  estate exposes a machine-readable contract, so every API-shaped standard below is
+  recorded as not-conformant-because-not-published, never as a failure of the
+  underlying service.
+standards:
+- id: oidc
+  name: OpenID Connect Discovery 1.0
+  conforms: true
+  evidence:
+    url: https://start.uptake.com/.well-known/openid-configuration
+    http_status: 200
+    detail: >-
+      Serves issuer, authorization_endpoint, token_endpoint, userinfo_endpoint,
+      jwks_uri, registration_endpoint, response_types_supported,
+      subject_types_supported and id_token_signing_alg_values_supported (RS256) —
+      all required discovery members present.
+- id: oauth2
+  name: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+  conforms: true
+  evidence:
+    url: https://start.uptake.com/.well-known/oauth-authorization-server
+    http_status: 200
+    detail: >-
+      issuer, authorization_endpoint, token_endpoint, response_types_supported and
+      grant_types_supported present; grants include authorization_code,
+      client_credentials, refresh_token and device_code.
+- id: pkce
+  name: PKCE (RFC 7636)
+  conforms: true
+  evidence:
+    url: https://start.uptake.com/.well-known/openid-configuration
+    http_status: 200
+    detail: code_challenge_methods_supported includes S256.
+- id: dcr
+  name: OAuth 2.0 Dynamic Client Registration (RFC 7591)
+  conforms: true
+  evidence:
+    url: https://start.uptake.com/.well-known/openid-configuration
+    http_status: 200
+    detail: registration_endpoint https://start.uptake.com/oauth2/v1/clients advertised.
+- id: openapi
+  name: OpenAPI Specification
+  conforms: false
+  evidence:
+    url: https://api.uptake.com/openapi.json
+    http_status: 403
+    detail: >-
+      No OpenAPI at any probed location on api.uptake.com, api.common.uptake.com,
+      developer.uptake.com, developers.uptake.com, fleet.uptake.com, login.uptake.com
+      or start.uptake.com. fleet.uptake.com/api-docs returns 200 but is the SPA
+      catch-all HTML shell, not a spec.
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  evidence:
+    url: https://api.uptake.com/asyncapi.json
+    http_status: 403
+    detail: No event or streaming contract published; no public webhook catalog either.
+- id: rfc9457
+  name: Problem Details for HTTP APIs (RFC 9457)
+  conforms: false
+  evidence:
+    url: https://api.uptake.com/
+    http_status: 403
+    detail: >-
+      The gateway's anonymous error body is {"message":"Forbidden"} with
+      content-type application/json — the AWS API Gateway default envelope, not
+      application/problem+json.
+- id: rfc9116
+  name: security.txt (RFC 9116)
+  conforms: false
+  evidence:
+    url: https://start.uptake.com/.well-known/security.txt
+    http_status: 405
+    detail: >-
+      No security.txt on any reachable host. uptake.com cannot be probed (bot
+      challenge answers 202 for every path).
+- id: rfc8594
+  name: Sunset header / deprecation policy (RFC 8594)
+  conforms: false
+  evidence:
+    url: https://api.uptake.com/
+    http_status: 403
+    detail: No Sunset or Deprecation header on any observed response; no public deprecation policy page.
+- id: hsts
+  name: HTTP Strict Transport Security
+  conforms: partial
+  evidence:
+    url: https://login.uptake.com/
+    http_status: 200
+    detail: >-
+      login.uptake.com sends strict-transport-security max-age=31536000;
+      includeSubDomains; preload. The apex uptake.com does not send HSTS
+      (see security/uptake-domain-security.yml).
+certifications_published:
+  found: false
+  note: >-
+    Uptake's security page (https://uptake.com/security/) is indexed by search
+    engines but could not be fetched — every request to uptake.com returns a
+    169-byte SiteGround sgcaptcha challenge with status 202. No SOC 2, ISO 27001,
+    PCI, HIPAA or FedRAMP claim is asserted here because none was verified
+    first-hand. No `Compliance` pointer is wired in apis.yml.
+checked: '2026-08-05'

@@ -1,0 +1,91 @@
+generated: '2026-08-05'
+method: probed
+source: live HTTP probes of every reachable uptake.com host
+description: >-
+  Index of /.well-known/ probes across the Uptake estate. Two real documents were
+  found, both served by Uptake's Okta identity tenant on its custom domain
+  start.uptake.com: an OpenID Connect discovery document and an OAuth 2.0
+  authorization-server metadata document (RFC 8414). Every other host either
+  404s, blanket-403s (the AWS API Gateway hosts), or answers 200 with the same
+  885-byte SPA shell for every path (fleet.uptake.com) — those 200s are catch-all
+  false positives and are recorded as such, not as hits.
+files:
+- path: /.well-known/openid-configuration
+  host: start.uptake.com
+  url: https://start.uptake.com/.well-known/openid-configuration
+  status: 200
+  content_type: application/json
+  file: uptake-openid-configuration.json
+  note: OpenID Connect discovery for Uptake's Okta org (issuer https://start.uptake.com).
+- path: /.well-known/oauth-authorization-server
+  host: start.uptake.com
+  url: https://start.uptake.com/.well-known/oauth-authorization-server
+  status: 200
+  content_type: application/json
+  file: uptake-oauth-authorization-server.json
+  note: >-
+    RFC 8414 authorization-server metadata for the same Okta org. Its
+    scopes_supported list is the Okta management API scope set exposed by the
+    tenant, not Uptake product-API scopes.
+probed_misses:
+- host: start.uptake.com
+  results:
+  - {path: /.well-known/security.txt, status: 405}
+  - {path: /.well-known/api-catalog, status: 405}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404}
+  - {path: /robots.txt, status: 200, note: 'Okta boilerplate: Disallow / for all agents.'}
+- host: uptake.com
+  results:
+  - {path: /.well-known/security.txt, status: 202, note: SiteGround sgcaptcha bot challenge — every path returns the same 169-byte challenge, so no status is meaningful.}
+  - {path: /robots.txt, status: 202, note: bot challenge}
+  - {path: /llms.txt, status: 202, note: bot challenge}
+- host: api.uptake.com
+  results:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/agent-card.json, status: 403}
+  - {path: /.well-known/agent.json, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+  note: AWS API Gateway ForbiddenException on every anonymous path.
+- host: api.common.uptake.com
+  results:
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/agent-card.json, status: 403}
+  note: Second AWS API Gateway, identical blanket 403.
+- host: developer.uptake.com
+  results:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /llms.txt, status: 404}
+  note: >-
+    Former Uptake Developer Portal. The host still resolves and terminates on
+    nginx, but every path is 404. Wayback records a login-gated SPA there through
+    2021 (/api/auth/users/current returned 401).
+- host: developers.uptake.com
+  results:
+  - {path: /, status: 404}
+- host: login.uptake.com
+  results:
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+- host: fleet.uptake.com
+  results:
+  - {path: /.well-known/openid-configuration, status: 200, false_positive: true}
+  - {path: /.well-known/oauth-authorization-server, status: 200, false_positive: true}
+  - {path: /.well-known/api-catalog, status: 200, false_positive: true}
+  - {path: /api-docs, status: 200, false_positive: true}
+  - {path: /.well-known/agent-card.json, status: 404}
+  note: >-
+    Vue SPA catch-all. Every one of those 200s returns the identical 885-byte
+    text/html app shell, not JSON — rejected, not recorded as a hit.
+- host: geotab.uptake.com
+  results:
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  note: MyGeotab Add-In shell for the Uptake Essentials marketplace add-in.
+checked: '2026-08-05'
