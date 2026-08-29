@@ -11,6 +11,17 @@ description: 'Uptake Technologies is a Chicago-based industrial AI and predictiv
   data to cloud) and Scout (rules-based alerting), delivered through the fleet.uptake.com
   web application, a Geotab Marketplace add-in, and a customer-provisioned REST API
   gateway at api.uptake.com. Bosch announced its acquisition of Uptake in March 2026.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://avatars.githubusercontent.com/u/26656201?v=4
 url: https://raw.githubusercontent.com/api-evangelist/uptake/refs/heads/main/apis.yml
 x-type: company
