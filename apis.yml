@@ -52,8 +52,9 @@ tags:
 - Asset Performance Management
 - Fleet Management
 - Telematics
-- Machine-Learning
+- Machine Learning
 - Industrial IoT
+- Industrial
 tags_raw:
 - Company
 - Industrial AI
@@ -63,6 +64,8 @@ tags_raw:
 - Telematics
 - Machine Learning
 - Industrial IoT
+- Machine-Learning
+- Industrial
 apis:
 - name: Uptake Platform API
   description: 'Uptake''s customer-provisioned REST API. The gateway is live at api.uptake.com
