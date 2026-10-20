@@ -1,8 +1,19 @@
-generated: '2026-10-13'
+generated: '2026-10-20'
 method: searched
+source:
+- geotab/integrations/geotab-integration-edges.yml
+- https://zapier.com/apps/uptake/integrations
+- https://n8n.io/integrations/uptake/
+- https://composio.dev/toolkits/uptake
+- https://monid.ai/tools/uptake
 checked:
 - geotab/integrations/geotab-integration-edges.yml
 - https://aws.amazon.com/marketplace/
+- https://composio.dev/toolkits/uptake
+- https://monid.ai/tools/uptake
+- https://n8n.io/integrations/uptake/
+- https://zapier.com/apps/uptake/integrations
+summary: null
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -37,5 +48,4 @@ edges:
   listing_count: 1
   detected: '2026-10-14'
   detected_by: mirror-platform-listings.py
-source:
-- geotab/integrations/geotab-integration-edges.yml
+templates: []

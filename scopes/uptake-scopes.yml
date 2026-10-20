@@ -2,15 +2,11 @@ generated: '2026-08-05'
 method: probed
 source: https://start.uptake.com/.well-known/openid-configuration
 docs: null
-summary: >-
-  Uptake publishes no OpenAPI and no scope reference page, so these scopes come
-  from the only anonymous, machine-readable auth metadata the estate serves: the
-  OIDC discovery and RFC 8414 authorization-server metadata documents on Uptake's
-  Okta tenant at start.uptake.com. IMPORTANT — these are IDENTITY scopes, not
-  Uptake product-API scopes. The okta.* set is Okta's own org-management scope
-  vocabulary, present because the tenant fronts the Okta management API; it does
-  not describe access to Uptake Fleet, Radar, Compass, Fusion or Scout data. No
-  Uptake product scope vocabulary is published anywhere we could reach.
+summary: 'Uptake publishes no OpenAPI and no scope reference page, so these scopes come from the only anonymous, machine-readable auth metadata the estate
+  serves: the OIDC discovery and RFC 8414 authorization-server metadata documents on Uptake''s Okta tenant at start.uptake.com. IMPORTANT — these are IDENTITY
+  scopes, not Uptake product-API scopes. The okta.* set is Okta''s own org-management scope vocabulary, present because the tenant fronts the Okta management
+  API; it does not describe access to Uptake Fleet, Radar, Compass, Fusion or Scout data. No Uptake product scope vocabulary is published anywhere we could
+  reach.'
 issuer: https://start.uptake.com
 scope_sets:
 - id: oidc-standard
@@ -35,10 +31,8 @@ scope_sets:
     description: Release the user's Okta group memberships — the claim Uptake tenancy/role mapping is most likely to key on.
 - id: okta-management
   origin: RFC 8414 authorization-server metadata
-  applies_to: >-
-    The Okta management API on Uptake's tenant, NOT the Uptake product API.
-    Recorded for completeness and for the auth-clarity signal; do not read this
-    as an Uptake data-access scope vocabulary.
+  applies_to: The Okta management API on Uptake's tenant, NOT the Uptake product API. Recorded for completeness and for the auth-clarity signal; do not
+    read this as an Uptake data-access scope vocabulary.
   source_url: https://start.uptake.com/.well-known/oauth-authorization-server
   http_status: 200
   scope_count: 80
@@ -61,12 +55,31 @@ scope_sets:
   full_list_file: well-known/uptake-oauth-authorization-server.json
 product_api_scopes:
   published: false
-  note: >-
-    api.uptake.com and api.common.uptake.com return 403 ForbiddenException to every
-    anonymous request with no WWW-Authenticate challenge, so no scope, realm or
-    audience is advertised. The retired developer portal (developer.uptake.com)
-    now 404s. Nothing to record without credentials.
+  note: api.uptake.com and api.common.uptake.com return 403 ForbiddenException to every anonymous request with no WWW-Authenticate challenge, so no scope,
+    realm or audience is advertised. The retired developer portal (developer.uptake.com) now 404s. Nothing to record without credentials.
 gaps_for_provider:
 - Publish the Uptake Platform API scope/permission reference at a public URL.
 - Return a WWW-Authenticate challenge on the gateway so the auth model is discoverable without a support ticket.
 checked: '2026-08-05'
+scopes:
+- name: openid
+  description: Required OIDC scope; requests an ID token.
+  set: oidc-standard
+- name: email
+  description: Release the user's email address and email_verified claim.
+  set: oidc-standard
+- name: profile
+  description: Release standard profile claims (name, given_name, family_name, locale, zoneinfo, updated_at).
+  set: oidc-standard
+- name: address
+  description: Release the user's address claim.
+  set: oidc-standard
+- name: phone
+  description: Release phone_number and phone_number_verified claims.
+  set: oidc-standard
+- name: offline_access
+  description: Issue a refresh token.
+  set: oidc-standard
+- name: groups
+  description: Release the user's Okta group memberships — the claim Uptake tenancy/role mapping is most likely to key on.
+  set: oidc-standard

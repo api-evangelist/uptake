@@ -1,16 +1,15 @@
 aid: uptake
+
 name: Uptake
-description: 'Uptake Technologies is a Chicago-based industrial AI and predictive-maintenance
-  software company founded in 2014 by Eric Lefkofsky and Brad Keywell. Its SaaS platform
-  ingests telematics, sensor, fluid-analysis and work-order data from heavy commercial
-  fleets and industrial assets, then applies machine-learning failure models — backed
-  by an Asset Strategy Library of roughly 800 equipment types and tens of thousands
-  of failure modes acquired with Asset Performance Technologies in 2018 — to predict
-  component failure before it happens. Products include Uptake Fleet and Radar (predictive
-  maintenance alerts), Compass (work-order data cleansing), Fusion (operational-technology
-  data to cloud) and Scout (rules-based alerting), delivered through the fleet.uptake.com
-  web application, a Geotab Marketplace add-in, and a customer-provisioned REST API
-  gateway at api.uptake.com. Bosch announced its acquisition of Uptake in March 2026.'
+
+description: Uptake Technologies is a Chicago-based industrial AI and predictive-maintenance software company founded in 2014 by Eric Lefkofsky
+  and Brad Keywell. Its SaaS platform ingests telematics, sensor, fluid-analysis and work-order data from heavy commercial fleets and industrial
+  assets, then applies machine-learning failure models — backed by an Asset Strategy Library of roughly 800 equipment types and tens of thousands
+  of failure modes acquired with Asset Performance Technologies in 2018 — to predict component failure before it happens. Products include Uptake
+  Fleet and Radar (predictive maintenance alerts), Compass (work-order data cleansing), Fusion (operational-technology data to cloud) and Scout
+  (rules-based alerting), delivered through the fleet.uptake.com web application, a Geotab Marketplace add-in, and a customer-provisioned REST
+  API gateway at api.uptake.com. Bosch announced its acquisition of Uptake in March 2026.
+
 deliveryModel:
   model: saas
   open_source: false
@@ -22,6 +21,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -36,15 +36,25 @@ accessModel:
   - security
   generated: '2026-09-02'
   method: derived
+
 image: https://avatars.githubusercontent.com/u/26656201?v=4
+
 url: https://raw.githubusercontent.com/api-evangelist/uptake/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+
+x-tier-reason: enrichment pass 2026-10-20 (local-v5; was harvest)
+
 specificationVersion: '0.23'
+
 created: '2026-08-05'
+
 modified: '2026-08-05'
+
 tags:
 - Company
 - Industrial AI
@@ -55,6 +65,7 @@ tags:
 - Machine Learning
 - Industrial IoT
 - Industrial
+
 tags_raw:
 - Company
 - Industrial AI
@@ -66,35 +77,22 @@ tags_raw:
 - Industrial IoT
 - Machine-Learning
 - Industrial
-apis:
-- name: Uptake Platform API
-  description: 'Uptake''s customer-provisioned REST API. The gateway is live at api.uptake.com
-    (AWS API Gateway behind Cloudflare) and answers every anonymous request with HTTP
-    403 ForbiddenException; a sibling gateway runs at api.common.uptake.com with identical
-    behavior. Uptake''s Geotab Marketplace listing states that vehicle health status
-    and impending-failure alerts are delivered through a dashboard, email, or via API
-    to connect to a third party system, and integration partners such as Fleetio are
-    instructed to hand their token to an Uptake account representative who completes
-    the connection. No public OpenAPI, Swagger, GraphQL SDL, AsyncAPI or Postman collection
-    is published anywhere on the uptake.com estate; the former developer portal at
-    developer.uptake.com now returns nginx 404.'
-  humanURL: https://uptake.com/fleet/
-  baseURL: https://api.uptake.com/
-  tags:
-  - Predictive Maintenance
-  - Fleet
-  - Telematics
-  properties:
-  - type: Authentication
-    url: authentication/uptake-authentication.yml
-  - type: OAuthScopes
-    url: scopes/uptake-scopes.yml
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
 common:
+- type: Hosts
+  url: hosts/uptake-hosts.yml
+- type: IntegrationEdges
+  url: integrations/uptake-integration-edges.yml
+- type: Vendors
+  url: vendors/uptake-vendors.yml
+- type: SDKs
+  url: packages/uptake-packages.yml
 - type: DomainSecurity
   url: security/uptake-domain-security.yml
 - type: Website
@@ -123,24 +121,41 @@ common:
   url: conformance/uptake-conformance.yml
 - type: Packages
   url: packages/uptake-packages.yml
-- type: LLMsTxt
-  url: llms/uptake-llms.txt
+
+apis:
+- name: Uptake Platform API
+  description: Uptake's customer-provisioned REST API. The gateway is live at api.uptake.com (AWS API Gateway behind Cloudflare) and answers every
+    anonymous request with HTTP 403 ForbiddenException; a sibling gateway runs at api.common.uptake.com with identical behavior. Uptake's Geotab
+    Marketplace listing states that vehicle health status and impending-failure alerts are delivered through a dashboard, email, or via API to
+    connect to a third party system, and integration partners such as Fleetio are instructed to hand their token to an Uptake account representative
+    who completes the connection. No public OpenAPI, Swagger, GraphQL SDL, AsyncAPI or Postman collection is published anywhere on the uptake.com
+    estate; the former developer portal at developer.uptake.com now returns nginx 404.
+  humanURL: https://uptake.com/fleet/
+  baseURL: https://api.uptake.com/
+  tags:
+  - Predictive Maintenance
+  - Fleet
+  - Telematics
+  properties:
+  - type: Authentication
+    url: authentication/uptake-authentication.yml
+  - type: OAuthScopes
+    url: scopes/uptake-scopes.yml
+  aid: uptake:uptake-platform-api
+
 x-enrichment:
-  date: '2026-08-05'
+  date: '2026-10-20'
   status: minimal
-  artifacts_added: 9
-  pass: local-v1
+  artifacts_added: 0
+  pass: local-v5
+
 x-coverage:
   state: gated
   reason: customer-only-docs
-  detail: >-
-    Uptake's former developer portal at developer.uptake.com now returns nginx 404
-    and its user guide and release notes are Google Sites that 302 to a Google
-    account sign-in, so the only anonymous machine-readable surface left on the
-    estate is the Okta OIDC discovery document at start.uptake.com; the live
-    gateway at api.uptake.com answers 403 ForbiddenException on every path with no
-    WWW-Authenticate challenge, and integration partners are told to hand their
-    token to an Uptake account representative rather than read a spec.
+  detail: Uptake's former developer portal at developer.uptake.com now returns nginx 404 and its user guide and release notes are Google Sites
+    that 302 to a Google account sign-in, so the only anonymous machine-readable surface left on the estate is the Okta OIDC discovery document
+    at start.uptake.com; the live gateway at api.uptake.com answers 403 ForbiddenException on every path with no WWW-Authenticate challenge, and
+    integration partners are told to hand their token to an Uptake account representative rather than read a spec.
   evidence:
   - url: https://developer.uptake.com/
     status: 404
@@ -150,4 +165,4 @@ x-coverage:
     status: 302
   - url: https://start.uptake.com/.well-known/openid-configuration
     status: 200
-  checked: '2026-08-05'
+  checked: '2026-10-20'

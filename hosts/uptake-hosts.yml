@@ -1,0 +1,89 @@
+generated: '2026-10-20'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 6
+  own: 3
+  other_domain: 0
+  platform: 3
+  roles:
+  - api
+  - identity
+  - marketing
+  - other
+  - source
+  - website
+hosts:
+- host: api.uptake.com
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types: []
+  serves:
+  - api
+  - api-gateway
+  - cdn
+  vendor: aws-api-gateway
+  registrable_domain: uptake.com
+  role: api
+  relation: own
+- host: fleet.uptake.com
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Login
+  serves: []
+  registrable_domain: uptake.com
+  role: identity
+  relation: own
+- host: forgeglobal.com
+  found_by:
+  - pointer
+  types:
+  - SecondaryMarket
+  serves: []
+  registrable_domain: forgeglobal.com
+  role: other
+  relation: platform
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: medium.com
+  found_by:
+  - pointer
+  types:
+  - Blog
+  serves: []
+  registrable_domain: medium.com
+  role: marketing
+  relation: platform
+- host: uptake.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Website
+  - Support
+  - TermsOfService
+  - PrivacyPolicy
+  serves:
+  - docs
+  registrable_domain: uptake.com
+  role: website
+  relation: own
