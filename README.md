@@ -64,5 +64,95 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Uptake is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/uptake_stock/
+Uptake Technologies is a Chicago-based industrial AI and predictive-maintenance software company founded in 2014 by Eric Lefkofsky and Brad Keywell. Its SaaS platform ingests telematics, sensor, fluid-analysis and work-order data from heavy commercial fleets and industrial assets, then applies machine-learning failure models — backed by an Asset Strategy Library of roughly 800 equipment types and tens of thousands of failure modes acquired with Asset Performance Technologies in 2018 — to predict component failure before it happens. Products include Uptake Fleet and Radar (predictive maintenance alerts), Compass (work-order data cleansing), Fusion (operational-technology data to cloud) and Scout (rules-based alerting), delivered through the fleet.uptake.com web application, a Geotab Marketplace add-in, and a customer-provisioned REST API gateway at api.uptake.com. Bosch announced its acquisition of Uptake in March 2026.
+
+**Areas:** Company · Industrial AI · Predictive Maintenance · Asset Performance Management · Fleet Management · Telematics · Machine Learning · Industrial IoT · Industrial
+
+## Uptake on APIs.io
+
+Everything profiled for Uptake is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/uptake/](https://apis.io/providers/uptake/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [Uptake Platform API](https://apis.io/apis/uptake/uptake-platform-api/) — Uptake's customer-provisioned REST API. The gateway is live at api.uptake.com (AWS API Gateway behind Cloudflare) and answers every anonymous request with…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Uptake Authentication](https://apis.io/security/uptake/uptake-authentication/)
+- [Uptake Domain Security](https://apis.io/security/uptake/uptake-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Uptake Scopes](https://apis.io/scopes/uptake/uptake-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://uptake.com/)
+- [Support](https://uptake.com/legal/support-policy)
+- [Blog](https://medium.com/uptake-tech)
+- [Terms of service](https://uptake.com/legal/lmaster-subscription-agreement/)
+- [Privacy policy](https://uptake.com/privacy-notice/)
+- [GitHub](https://github.com/uptake)
+
+## API Evangelist rating
+
+**Kin Score 17.5** — emerging · rubric 0.24.0 · scored 2026-10-20
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 21.4 |
+| Access clarity | 11.8 |
+
+**Agent readiness 15.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+
+**Regulatory alignment 26.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/uptake/](https://apis.io/providers/uptake/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Uptake: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/uptake/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
